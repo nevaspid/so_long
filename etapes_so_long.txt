@@ -1,0 +1,55 @@
+// verifier si la map est entourée par des murs ( 1 ) //
+
+true     false
+
+1111     1111
+1001     1000
+1001     1001
+1111     1111
+
+// verifier que la map contient//
+
+- 1 personnage ( P )
+
+- 1 collectible ( C )
+
+- 1 exit ( E )
+
+- 1 ennemi ( X )
+
+// verifier que la map contient au minimum //
+
+- 1 personnage ( P )
+
+- 1 exit ( E )
+
+// verifier que la map est rectangulaire //
+
+ true         false
+
+1111111	 1111111
+1000001	 1000001
+1000001      10000001
+1000001      1000001
+1000001      1000001
+1111111      1111111
+
+// verifier que le fichier passer en parametre via argv[2] est bien en .ber //
+
+true = map.ber
+
+false = map.ber.txt
+
+// verifier que le fichier est lisible //
+
+open le dossier est si le fd est negatif alors il n'est pas lisible 
+ou
+faire un read du fd via read(fd, 0, 0) pour voir si il est lisible 
+
+possiblement les 2 a faire.
+
+// verifier qu'il n'y a pas des character inconnu pour la map //
+
+il y a [0, 1, P, C, E] autoriser et minimum, mais si jamais il y a des ennemies au choix, alors le character choisi pour le representer sera autoriser, mais les autres characters inconnu sont a check.
+
+Bonne chance ... 
