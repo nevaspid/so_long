@@ -6,7 +6,7 @@
 /*   By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 04:10:46 by gloms             #+#    #+#             */
-/*   Updated: 2023/06/02 07:13:28 by gloms            ###   ########.fr       */
+/*   Updated: 2023/06/02 07:26:41 by gloms            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void game_over(t_map *m)
 {
 	write(1, "-------------\n", 15);
 	write(1, "| ", 2);
-	write(1, "\033[1;31mGame Over\033[00m", 27);
-	write(1, " |\n", 3);
+	write(1, "\033[1;31mGame Over\033[00m", 21);
+	write(1, " |\n", 4);
 	write(1, "-------------\n", 15);
 	mlx_terminate(m->mlx);
 	free(m);

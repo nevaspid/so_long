@@ -6,7 +6,7 @@
 /*   By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:29:39 by gloms             #+#    #+#             */
-/*   Updated: 2023/06/01 20:53:32 by gloms            ###   ########.fr       */
+/*   Updated: 2023/06/02 08:16:31 by gloms            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void portal_anim(void *param)
 	t_map *m;
 
 	m = param;
-
 	if(m->c == 0)
 	{
 		spawn_portal(m);
