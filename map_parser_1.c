@@ -6,7 +6,7 @@
 /*   By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 12:39:18 by gloms             #+#    #+#             */
-/*   Updated: 2023/05/20 14:23:19 by gloms            ###   ########.fr       */
+/*   Updated: 2023/06/02 06:41:21 by gloms            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,27 +62,26 @@ int	check_first_and_last(char *line)
 int	check_middle_lines(char *map_line, t_map *s_map)
 {
 	int	i;
-	int	lenline;
 	int	lenlastline;
 
 	lenlastline = (ft_strlen(s_map->map[s_map->lastline]) - 2);
-	lenline = (ft_strlen(map_line) - 2);
+	s_map->lenline = (ft_strlen(map_line) - 2);
 	i = 0;
 	while (map_line[i])
 	{
 		if (map_line[i] != 'P' && map_line[i] != 'E' && map_line[i] != 'Z'
 			&& map_line[i] != 'C' && map_line[i] != '1' && map_line[i] != '0'
 			&& map_line[i] != '\n' || map_line[0] != '1'
-			|| lenline != lenlastline || map_line[lenline] != '1')
+			|| s_map->lenline != lenlastline || map_line[s_map->lenline] != '1')
 			return (-5);
 		if (map_line[i] == 'P')
-			s_map->p = 1;
+			s_map->p += 1;
 		if (map_line[i] == 'E')
-			s_map->e = 1;
+			s_map->e += 1;
 		if (map_line[i] == 'Z')
-			s_map->z = 1;
+			s_map->z += 1;
 		if (map_line[i] == 'C')
-			s_map->c = 1;
+			s_map->c += 1;
 		i++;
 	}
 	return (1);
@@ -97,16 +96,20 @@ int	struct_initiator(t_map *s_map, char *file)
 	map_malloc = count_map(file);
 	fd = open(file, O_RDONLY);
 	i = 0;
+	s_map->y = 0;
+	s_map->x = 0;
 	s_map->p = 0;
 	s_map->e = 0;
 	s_map->z = 0;
 	s_map->c = 0;
+	s_map->moves = 0;
 	s_map->map = malloc(sizeof(char *) * map_malloc + 1);
+	s_map->duplicata_map = malloc(sizeof(char *) * map_malloc + 1);
 	s_map->map[i] = get_next_line(fd);
 	while (s_map->map[i])
 	{
-		i++;
-		s_map->map[i] = get_next_line(fd);
+		s_map->map[++i] = get_next_line(fd);
+		s_map->duplicata_map[i] = s_map->map[i];
 	}
 	s_map->lastline = i - 1;
 	close(fd);

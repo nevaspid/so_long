@@ -6,7 +6,7 @@
 /*   By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 18:49:46 by gloms             #+#    #+#             */
-/*   Updated: 2023/05/20 14:30:14 by gloms            ###   ########.fr       */
+/*   Updated: 2023/06/02 07:10:54 by gloms            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int return_error(int returned)
 	{
 		write(2, "ERROR\nwrong input file", 23);
 	}
+	if (returned == -5)
+	{
+		write(2, "ERROR\nmap isn't finishable", 26);
+	}
+	if (returned == -8)
+		write(2, "ERROR\nin collusions", 20);
 	exit(EXIT_FAILURE);
 }
 int	count_map(char *file)
@@ -58,3 +64,50 @@ int	count_map(char *file)
 	close(fd);
 	return (i);
 }
+int where_is_p_x(t_map *s_map)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	x = -1;
+	while (s_map->map[++y])
+	{
+		while (s_map->map[y][++x])
+		{
+			if (s_map->map[y][x] == 'P')
+			{
+				s_map->px = x;
+				return (x);
+			}
+		}
+		x = -1;
+	}
+	return (-1);
+}
+
+int where_is_p_y(t_map *s_map)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	x = -1;
+	while (s_map->map[++y])
+	{
+		while (s_map->map[y][++x])
+		{
+			if (s_map->map[y][x] == 'P')
+			{
+				s_map->py = y;
+				return (y);
+			}
+		}
+		x = -1;
+	}
+	return (-1);
+}
+// int is_finishable(t_map *m, int x, int y)
+// {
+
+// }

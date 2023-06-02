@@ -6,14 +6,48 @@
 /*   By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:10:00 by gloms             #+#    #+#             */
-/*   Updated: 2023/05/16 16:42:25 by gloms            ###   ########.fr       */
+/*   Updated: 2023/06/02 07:11:50 by gloms            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-//int so_long(t_map map, int fd)
+void init_play(t_map *m)
+{
+	mlx_texture_t *texture;
 
+    texture = mlx_load_png("assets/slimeright/sr0.png");
+    m->player = mlx_texture_to_image(m->mlx, texture);
+    mlx_image_to_window(m->mlx, m->player, m->px * 64, m->py * 64);
+}
+
+void 	key(mlx_key_data_t keydata, void *param)
+{
+	t_map *m;
+
+	m = param;
+	(void)keydata;
+	if (mlx_is_key_down(m->mlx, MLX_KEY_W) && collusion(m, 'w') > 0)
+	{
+		m->py -= 1;
+		m->player->instances[0].y -= 1 * 64;
+	}
+	if (mlx_is_key_down(m->mlx, MLX_KEY_S) && collusion(m, 's') > 0)
+	{
+		m->py += 1;
+		m->player->instances[0].y += 1 * 64;
+	}
+	if (mlx_is_key_down(m->mlx, MLX_KEY_A) && collusion2(m, 'a') > 0)
+	{
+		m->px -=1;
+		m->player->instances[0].x -= 1 * 64;
+	}
+	if (mlx_is_key_down(m->mlx, MLX_KEY_D) && collusion2(m, 'd') > 0)
+	{
+		m->px += 1;
+		m->player->instances[0].x += 1 * 64;
+	}
+}
 
 int	main(int ac, char **av)
 {
@@ -22,28 +56,15 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (write(2, "Error\n", 6));
 	s_map = malloc(sizeof(t_map));
-	if (map_parser(av[1], s_map) < 0)
-		return (write(2, "Error\n", 6));
-	else 
-		return (write(1, "ok", 2));
+	map_parser(av[1], s_map);
+	s_map->c_copy = s_map->c;
+	where_is_p_y(s_map);
+	where_is_p_x(s_map);
+	//is_finishable(s_map, where_is_p_y(s_map), where_is_p_x(s_map));
+	s_map->mlx = mlx_init((s_map->lenline + 1) * 64, (s_map->lastline + 1) * 64, "so_long", true);
+	init_map(s_map);
+	mlx_key_hook(s_map->mlx, &key, s_map);
+	mlx_loop_hook(s_map->mlx, &portal_anim, s_map);
+	mlx_loop(s_map->mlx);
 	return (1);
 }
-
-// int main(int ac, char **av)
-// {
-// 	int fd;
-// 	char *line;
-
-// 	line = NULL;
-// 	fd = open(av[1], O_RDONLY);
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line)
-// 			break;
-// 		printf("%s", line);
-// 		printf("%d\n%c\n", ft_strlen(line), line[11]);
-// 		free(line);
-// 	}
-// 	return (0);
-// }

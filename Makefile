@@ -6,7 +6,7 @@
 #    By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 15:46:57 by gloms             #+#    #+#              #
-#    Updated: 2023/05/08 16:07:38 by gloms            ###   ########.fr        #
+#    Updated: 2023/06/02 07:11:34 by gloms            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,21 @@
 
 NAME = so_long
 
-SRCS =	main.c 
+SRCS =	so_long.c \
+		map_parser_1.c \
+		map_parser_2.c \
+		get_next_line.c \
+		get_next_line_utils.c \
+		texture_setup.c \
+		animations.c \
+		collusions.c \
+		collusions2.c \
 
 OBJS = $(SRCS:.c=.o)
 
 # ------------------------------ Flags -------------------------------
 
-GCC = @gcc
+GCC = @gcc -g3
 
 # ------------------------------ Colors ------------------------------
 
