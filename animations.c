@@ -6,13 +6,13 @@
 /*   By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:29:39 by gloms             #+#    #+#             */
-/*   Updated: 2023/06/02 08:16:31 by gloms            ###   ########.fr       */
+/*   Updated: 2023/06/03 01:19:31 by gloms            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int where_e_y(t_map *s_map)
+static int	wherey(t_map *s_map)
 {
 	int	x;
 	int	y;
@@ -32,7 +32,8 @@ static int where_e_y(t_map *s_map)
 	}
 	return (-1);
 }
-static int where_e_x(t_map *s_map)
+
+static int	wherex(t_map *s_map)
 {
 	int	x;
 	int	y;
@@ -52,10 +53,12 @@ static int where_e_x(t_map *s_map)
 	}
 	return (-1);
 }
-static mlx_texture_t *return_portal(int i)
-{
-	mlx_texture_t *texture;
 
+static mlx_texture_t	*return_portal(int i)
+{
+	mlx_texture_t	*texture;
+
+	texture = NULL;
 	if (i == 0)
 		texture = mlx_load_png("assets/portal.png/p0.png");
 	else if (i == 1)
@@ -77,12 +80,12 @@ static mlx_texture_t *return_portal(int i)
 	return (texture);
 }
 
-
-void spawn_portal(t_map *m)
+void	spawn_portal(t_map *m)
 {
-	static int anim = 0;
-	static int frames = 0;
-	mlx_texture_t *texture;
+	static int		anim = 0;
+	static int		frames = 0;
+	mlx_texture_t	*texture;
+
 	while (++frames < 8)
 		return ;
 	mlx_delete_image(m->mlx, m->portal);
@@ -93,15 +96,15 @@ void spawn_portal(t_map *m)
 	frames = 0;
 	m->portal = mlx_texture_to_image(m->mlx, texture);
 	mlx_resize_image(m->portal, 64, 64);
-	mlx_image_to_window(m->mlx, m->portal, where_e_x(m) * 64, where_e_y(m) * 64);
+	mlx_image_to_window(m->mlx, m->portal, wherex(m) * 64, wherey(m) * 64);
 }
 
-void portal_anim(void *param)
+void	portal_anim(void *param)
 {
-	t_map *m;
+	t_map	*m;
 
 	m = param;
-	if(m->c == 0)
+	if (m->c == 0)
 	{
 		spawn_portal(m);
 	}

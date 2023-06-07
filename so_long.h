@@ -6,7 +6,7 @@
 /*   By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 19:01:19 by gloms             #+#    #+#             */
-/*   Updated: 2023/06/02 08:15:09 by gloms            ###   ########.fr       */
+/*   Updated: 2023/06/03 01:08:19 by gloms            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 
 typedef struct s_map
 {
-	int c; // collectible
+	int			c;
 	int			c_copy;
-	int p; // personnage
-	int e; // exit
-	int z; // zennemi
+	int			p;
+	int			e;
+	int			z;
 	char		**map;
 	char		**duplicata_map;
 	int			lastline;
@@ -61,7 +61,7 @@ int				map_parser(char *file, t_map *s_map);
 int				check_first_and_last(char *line);
 int				check_middle_lines(char *line, t_map *s_map);
 int				check_ber(char *file);
-int				return_error(int returned);
+int				return_error(int returned, t_map *m);
 int				count_map(char *file);
 int				where_is_p_y(t_map *s_map);
 int				where_is_p_x(t_map *s_map);
@@ -71,8 +71,8 @@ mlx_texture_t	*slimedown(int i);
 mlx_texture_t	*slime_top(int i);
 mlx_texture_t	*slimeleft(int i);
 mlx_texture_t	*slimeright(int i);
-int				collusion(t_map *m, char a);
-int				collusion2(t_map *m, char a);
+int				c(t_map *m, char a);
+int				c2(t_map *m, char a);
 void			game_over(t_map *m);
 void			rm_collectible(t_map *m, char a);
 void			rm_collectible2(t_map *m, char a);
@@ -80,7 +80,9 @@ void			you_win(t_map *m);
 void			init_play(t_map *m);
 void			spawn_portal(t_map *map);
 void			portal_anim(void *param);
-void			freeall(char **m, char **dm, int i);
-int				is_finishable(t_map *m, int x, int y);
+void			freeall(t_map *m);
+int				valid_way(t_map *m, int x, int y);
+int				ft_putnbr_pf(long long nb);
+int				pm(t_map *m, char a);
 
 #endif

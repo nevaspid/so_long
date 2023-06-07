@@ -6,7 +6,7 @@
 /*   By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 19:01:28 by gloms             #+#    #+#             */
-/*   Updated: 2023/05/16 12:05:19 by gloms            ###   ########.fr       */
+/*   Updated: 2023/06/03 01:22:21 by gloms            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i] != '\0')
 		i++;
 	return (i);
@@ -92,6 +94,8 @@ char	*ft_strdup(char *s)
 	int		i;
 	char	*dest;
 
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s);
 	i = 0;
 	dest = malloc(sizeof(char) * (len + 1));

@@ -6,7 +6,7 @@
 #    By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 15:46:57 by gloms             #+#    #+#              #
-#    Updated: 2023/06/02 07:11:34 by gloms            ###   ########.fr        #
+#    Updated: 2023/06/03 01:05:23 by gloms            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,14 @@ SRCS =	so_long.c \
 		animations.c \
 		collusions.c \
 		collusions2.c \
+		valid_way.c \
+		putnbr.c
 
 OBJS = $(SRCS:.c=.o)
 
 # ------------------------------ Flags -------------------------------
 
-GCC = @gcc -g3
+GCC = @gcc  -Wall -Werror -Wextra
 
 # ------------------------------ Colors ------------------------------
 
@@ -59,10 +61,10 @@ FCLEAN_DELETE	= • Fclean : so_long.exe was been successfully deleted!
 all: $(NAME)
 
 $(NAME):
-	@$(GCC) $(SRCS) -o $(NAME) MLX42/libmlx42.a -I include -lglfw -L "/opt/homebrew/Cellar/glfw/3.3.8/lib/"
+	@$(GCC) $(SRCS) -o $(NAME) MLX42/build/libmlx42.a -I include -lglfw -L "/Users/rbrendle/.brew/opt/glfw/lib/"
 	@echo ${GREEN}"$(MAKE_MESS) $(NAME) $(FILES_OK)"${END}
 
-# ------------------------------ Rules -----------------------------------
+# --  ---------------------------- Rules -----------------------------------
 
 clean:
 	@rm -rf ${OBJS}

@@ -6,19 +6,19 @@
 /*   By: gloms <rbrendle@student.42mulhouse.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:07:35 by gloms             #+#    #+#             */
-/*   Updated: 2023/06/02 07:16:34 by gloms            ###   ########.fr       */
+/*   Updated: 2023/06/03 01:21:52 by gloms            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void you_win(t_map *m)
+void	you_win(t_map *m)
 {
-	write(1, "-------\n", 16);
+	write(1, "-------\n", 8);
 	write(1, "| ", 3);
 	write(1, "\033[1;32mWin\033[00m", 16);
 	write(1, " |\n", 3);
-	write(1, "-------\n", 16);
-	free(m);
+	write(1, "-------\n", 8);
+	freeall(m);
 	exit(EXIT_SUCCESS);
 }
